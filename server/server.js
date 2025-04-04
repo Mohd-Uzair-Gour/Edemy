@@ -31,7 +31,7 @@ app.post('/clerk', express.json() , clerkWebhooks)
 app.use('/api/educator',express.json(),educatorRouter)
 app.use('/api/course',express.json(),courseRouter)
 app.use('/api/user',express.json(),userRouter)
-app.use('/stipe',express.raw({type:'application/json'}),stripeWebhooks)
+app.post('/stripe',express.raw({type:'application/json'}),stripeWebhooks)
 
 
 app.listen(PORT,(req,res) => {
