@@ -26,6 +26,6 @@ educatorRouter.get(
   "/enrolled-students",
   protectEducator,
   getEnrolledStudentsData
-);
+); 
 
 export default educatorRouter;

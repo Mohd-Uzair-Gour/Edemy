@@ -36,4 +36,4 @@ app.post('/stripe',express.raw({type:'application/json'}),stripeWebhooks)
 
 app.listen(PORT,(req,res) => {
     console.log(`Server is running on ${PORT}`)
-})
+}) 

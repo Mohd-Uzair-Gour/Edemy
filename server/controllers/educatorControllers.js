@@ -2,6 +2,7 @@ import {clerkClient} from "@clerk/express"
 import Course from "../models/courseModel.js"
 import {v2 as cloudinary} from "cloudinary"
 import { Purchase } from "../models/purchaseModel.js"
+import User from '../models/userModel.js'
 
 export const updateRoleToEducator = async (req,res) => {
     try {
