@@ -19,6 +19,7 @@ const Player = () => {
     userData,
     fetchUserEnrolledCourses,
   } = useContext(AppContext);
+
   const { courseId } = useParams();
   const [courseData, setCourseData] = useState(null);
   const [openSections, setOpenSections] = useState({});
@@ -59,7 +60,7 @@ const Player = () => {
         backendUrl + "/api/user/update-course-progress",
         { courseId, lectureId },
         { headers: { Authorization: token } }
-      )
+      );
       if (data.success) {
         toast.success(data.message);
         getCourseProgress();
@@ -85,9 +86,10 @@ const Player = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
   };
+
   const handleRate = async (rating) => {
     try {
       const token = await getToken();
@@ -106,15 +108,16 @@ const Player = () => {
       toast.error(error.message);
     }
   };
+
   useEffect(() => {
     getCourseProgress();
   }, []);
 
   return courseData ? (
     <>
-      <div className="flex flex-col md:flex-row gap-6 p-32">
+      <div className="flex flex-col lg:flex-row gap-6 px-4 md:px-10 py-10 w-full max-w-7xl mx-auto">
         {/* Left Column (Course Structure) */}
-        <div className="w-full md:w-2/3">
+        <div className="w-full lg:w-2/3">
           <h2 className="text-2xl font-semibold mb-5">Course Structure</h2>
           <div className="pt-5">
             {courseData &&
@@ -139,7 +142,7 @@ const Player = () => {
                         {chapter.chapterTitle}
                       </p>
                     </div>
-                    <p className="text-sm md:text-default">
+                    <p className="text-sm md:text-base">
                       {chapter.chapterContent.length} lectures -{" "}
                       {calculateChapterTime(chapter)}
                     </p>
@@ -165,9 +168,9 @@ const Player = () => {
                             }
                             alt="play icon"
                           />
-                          <div className="flex items-center justify-between w-full text-gray-800 md:text-default">
+                          <div className="flex flex-col sm:flex-row sm:justify-between w-full text-gray-800 md:text-base text-sm gap-1">
                             <p>{lecture.lectureTitle}</p>
-                            <div className="flex gap-2">
+                            <div className="flex gap-3 items-center text-sm">
                               {lecture.lectureUrl && (
                                 <p
                                   onClick={() =>
@@ -197,14 +200,14 @@ const Player = () => {
                 </div>
               ))}
           </div>
-          <div className="flex items-center gap-2 py-3 mt-10">
+          <div className="flex flex-wrap items-center gap-2 py-3 mt-10">
             <h1 className="text-xl font-bold">Rate this course</h1>
             <Rating initialRating={initialRating} onRate={handleRate} />
           </div>
         </div>
 
-        {/* Right Column (Player Area) */}
-        <div className="w-full md:w-1/3">
+        {/* Right Column (Video Player) */}
+        <div className="w-full lg:w-1/3">
           {playerData ? (
             <div>
               <YouTube
